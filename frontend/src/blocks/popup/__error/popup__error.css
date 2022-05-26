@@ -1,0 +1,9 @@
+.popup__error {
+    font-style: normal;
+    font-size: 12px;
+    line-height: 15px;
+    color: rgba(255, 0, 0, 1);
+    opacity: 0;
+    transition: 0.3s;
+    margin-top: 5px;
+}

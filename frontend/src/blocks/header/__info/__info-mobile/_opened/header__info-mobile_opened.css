@@ -1,0 +1,14 @@
+@keyframes open {
+    from {
+        transform: scale(0);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .header__info-mobile_opened {
+        animation: open ease-in-out 0.5s forwards;
+    }
+}

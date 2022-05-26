@@ -1,0 +1,8 @@
+.cards__item {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    border-radius: 10px;
+    position: relative;
+}

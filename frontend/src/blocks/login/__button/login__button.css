@@ -1,0 +1,29 @@
+.login__button {
+    font-size: 18px;
+    line-height: 22px;
+    font-weight: 400;
+    cursor: pointer;
+    background: #fff;
+    color: #000;
+    margin-top: 216px;
+    padding: 14px 0;
+    text-align: center;
+    border: none;
+    border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+}
+
+.login__button:hover {
+    background: #fff;
+    opacity: 0.85;
+    border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+}
+
+@media screen and (max-width:320px) {
+    .login__button {
+        margin-top: 173px;
+    }
+}

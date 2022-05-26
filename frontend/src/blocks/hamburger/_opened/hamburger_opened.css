@@ -1,0 +1,38 @@
+@keyframes toCross1 {
+    from {
+        transform: translateY(0) rotate(0) scaleX(1);
+    }
+    to {
+        transform: translateY(8px) rotate(135deg) scaleX(1.3);
+    }
+}
+
+@keyframes toCross2 {
+    from {
+        transform: translateY(0) rotate(0) scaleX(1);
+    }
+    to {
+        transform: translateY(-8px) rotate(-135deg) scaleX(1.3);
+    }
+}
+
+@keyframes toCross3 {
+    from {
+        transform: scaleX(1);
+    }
+    to {
+        transform: scaleX(0);
+    }
+}
+
+.hamburger_opened:before {
+    animation: toCross1 ease-in-out 0.3s forwards;
+}
+
+.hamburger_opened:after {
+    animation: toCross2 ease-in-out 0.3s forwards;
+}
+
+.hamburger_opened span {
+    animation: toCross3 ease-in-out 0.3s forwards;
+}

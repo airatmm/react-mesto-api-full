@@ -1,0 +1,19 @@
+.profile__button_action_add {
+    margin-left: auto;
+    min-width: 150px;
+    min-height: 50px;
+    background-image: url('../../../../images/add_button.svg');
+    background-size: 22px 22px;
+    border: 2px solid #fff;
+    border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+}
+
+@media screen and (max-width: 768px) {
+    .profile__button_action_add {
+        width: 282px;
+        background-size: 16px 16px;
+        margin: 0;
+    }
+}

@@ -1,0 +1,22 @@
+.header__info {
+    display: grid;
+    grid-template-columns: repeat(2, max-content);
+    grid-template-rows: min-content;
+    grid-column-gap: 24px;
+    font-size: 18px;
+    line-height: 22px;
+    padding-top: 6px;
+}
+
+@media screen and (max-width: 768px) {
+    .header__info {
+        font-size: 14px;
+        line-height: 17px;
+    }
+}
+
+@media screen and (max-width: 520px) {
+    .header__info {
+        display: none;
+    }
+}

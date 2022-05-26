@@ -1,0 +1,19 @@
+.popup__fieldset {
+    width: calc(100% - 2 * 36px);
+    margin: 26px auto 14px;
+    padding: 0;
+    border: none;
+    text-align: center;
+    display: grid;
+    justify-items: center;
+    grid-row-gap: 32px;
+}
+
+
+@media screen and (max-width: 768px) {
+    .popup__fieldset {
+        width: 100%;
+        margin: 25px auto;
+        grid-row-gap: 40px;
+    }
+}
