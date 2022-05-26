@@ -41,15 +41,16 @@ async function main() {
 
   app.post('/signin', validateLogin, login);
   app.post('/signup', validateUser, createUser);
+
+  app.use(auth); // защищаем все роуты ниже, нет доступа неавторизованным пользователям
+  app.use('/', users);
+  app.use('/', cards);
+
   // Так как используется хранение токена в cookies
   // к след работе можно будет добавить роут signout, который очищал бы куки
   app.get('/signout', (req, res) => {
     res.status(200).clearCookie('jwt').send({ message: 'Выход' });
   });
-
-  app.use(auth); // защищаем все роуты ниже, нет доступа неавторизованным пользователям
-  app.use('/', users);
-  app.use('/', cards);
 
   // подключаем логгер ошибок
   // нужно подключить после обработчиков роутов и до обработчиков ошибок
