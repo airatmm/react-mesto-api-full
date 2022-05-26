@@ -51,8 +51,6 @@ async function main() {
   app.use('/', users);
   app.use('/', cards);
 
-
-
   // подключаем логгер ошибок
   // нужно подключить после обработчиков роутов и до обработчиков ошибок
   app.use(errorLogger);
