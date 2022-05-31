@@ -1,6 +1,5 @@
 //import {setToken} from "./token";
-
-export const BASE_URL = "http://localhost:3000";
+import BASE_URL from './utils';
 
 const checkResponse = (res) => {
     if (res.ok) {
