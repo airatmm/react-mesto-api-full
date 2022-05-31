@@ -15,7 +15,7 @@ import AddPlacePopup from './AddPlacePopup';
 import ConfirmDeletePopup from "./ConfirmDeletePopup";
 import ProtectedRoute from './ProtectedRoute';
 import * as auth from '../utils/auth';
-import {getToken, removeToken, setToken} from "../utils/token.js";
+//import {getToken, removeToken, setToken} from "../utils/token.js";
 import HeaderInfoMobile from "./HeaderInfoMobile";
 import loader from '../images/loader.svg';
 import successAuth from '../images/success.svg';
@@ -167,9 +167,9 @@ const App = () => {
         // получаем токен
         // если токен хранящийся в localstorage соответствует токену пользователя логинимся сразу и пушим в "/"
         // иначе на страницу логина + очищаем инпут эмайла
-        const jwt = getToken();
-        if (jwt) {
-            auth.getContent(jwt)
+        // const jwt = getToken();
+        // if (jwt) {
+            auth.getContent(/*jwt*/)
                 .then((res) => {
                     if (res && res.data.email) {
                         setLoggedIn(true);
@@ -188,14 +188,14 @@ const App = () => {
                         email: ""
                     });
                 });
-        }
+       // }
     }, [loggedIn, history]); // зависмость от хистори и от залогинен ли пользователь
 
 
     // сохранение токена в localstorage
     const checkRes = (res) => {
         if (res.jwt) {
-            setToken(res.jwt);
+            //setToken(res.jwt);
             setData({
                 email: res.data.email
             });
@@ -209,7 +209,7 @@ const App = () => {
         setData({
             email: null
         });
-        removeToken();
+        //removeToken();
         history.push('/sign-in');
         setIsHeaderInfoOpened(false)
     }

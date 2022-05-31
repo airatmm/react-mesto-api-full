@@ -1,7 +1,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
 
+require('dotenv').config();
+
 const { PORT = 3000 } = process.env; // Слушаем 3000 порт
+const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const helmet = require('helmet');
 const { errors } = require('celebrate');
@@ -15,6 +18,23 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const NotFoundError = require('./errors/NotFoundError');
 
 const app = express();
+
+// Массив разрешенных кросс-доменных запросов
+const accessCors = [
+  // 'https://mesto-project-36.nomoredomains.xyz',
+  // 'http://mesto-project-36.nomoredomains.xyz',
+  'http://localhost:3001',
+];
+
+const options = {
+  origin: accessCors,
+  method: ['GET,HEAD,PUT,PATCH,POST,DELETE'],
+  preflightContinue: false,
+  optionsSuccessStatus: 200,
+  credentials: true,
+};
+
+app.use(cors(options));
 
 // подключаемся к серверу mongo
 async function main() {

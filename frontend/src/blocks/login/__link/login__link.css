@@ -1,4 +1,11 @@
+
 .login__link {
     color: #fff;
+    transition: color .7s ease;
     text-decoration: none;
+}
+
+.login__link:hover {
+    color: #a9a9a9;
+    cursor: pointer;
 }

@@ -1,4 +1,6 @@
-export const BASE_URL = "https://auth.nomoreparties.co";
+//import {setToken} from "./token";
+
+export const BASE_URL = "http://localhost:3000";
 
 const checkResponse = (res) => {
     if (res.ok) {
@@ -14,6 +16,7 @@ export const register = (email, password) => {
             Accept: "application/json",
             "Content-Type": "application/json",
         },
+        credentials: 'include',
         body: JSON.stringify({email, password}),
     })
         .then(checkResponse);
@@ -26,25 +29,26 @@ export const authorize = (email, password) => {
             Accept: "application/json",
             "Content-Type": "application/json",
         },
+        credentials: 'include',
         body: JSON.stringify({email, password}),
     })
         .then(checkResponse)
         .then((data) => {
             if (data.token) {
-                localStorage.setItem('jwt', data.token);
+                //localStorage.setItem('jwt', data.token);
                 return data;
             }
         })
 };
 
-export const getContent = (token) => {
+export const getContent = () => {
     return fetch(`${BASE_URL}/users/me`, {
         method: "GET",
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
         },
+        credentials: 'include',
     })
         .then(checkResponse);
 };

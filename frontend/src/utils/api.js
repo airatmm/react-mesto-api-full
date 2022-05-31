@@ -1,7 +1,10 @@
+import BASE_URL from './utils';
+
+
 class Api {
-	constructor({address, token}) {
-		this._address = address;
-		this._token = token;
+	constructor({ BASE_URL }) {
+		this._address = BASE_URL;
+		//this._token = token;
 	}
 // Проверяем на ошибки
 	_checkResponse(res) {
@@ -16,9 +19,10 @@ class Api {
 		return fetch(`${this._address}/cards`, {
 			method: 'GET',
 			headers: {
-				authorization: this._token,
+				//authorization: this._token,
 				'Content-Type': 'application/json'
-			}
+			},
+			credentials: 'include',
 		})
 			.then(this._checkResponse)
 	}
@@ -28,9 +32,10 @@ class Api {
 		return fetch(`${this._address}/users/me`, {
 			method: 'GET',
 			headers: {
-				authorization: this._token,
+				//authorization: this._token,
 				'Content-Type': 'application/json'
-			}
+			},
+			credentials: 'include',
 		}).then(this._checkResponse)
 	}
 
@@ -39,13 +44,14 @@ class Api {
 		return fetch(`${this._address}/users/me`, {
 			method: 'PATCH',
 			headers: {
-				authorization: this._token,
+				//authorization: this._token,
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify({
 				name,
 				about
-			})
+			}),
+			credentials: 'include',
 		}).then(this._checkResponse)
 	}
 
@@ -54,13 +60,14 @@ class Api {
 		return fetch(`${this._address}/cards`, {
 			method: 'POST',
 			headers: {
-				authorization: this._token,
+				//authorization: this._token,
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify({
 				name,
 				link
-			})
+			}),
+			credentials: 'include',
 		}).then(this._checkResponse)
 	}
 
@@ -69,9 +76,10 @@ class Api {
 		return fetch(`${this._address}/cards/${id}`, {
 			method: 'DELETE',
 			headers: {
-				authorization: this._token,
+				//authorization: this._token,
 				'Content-Type': 'application/json'
-			}
+			},
+			credentials: 'include',
 		}).then(this._checkResponse)
 	}
 
@@ -80,9 +88,10 @@ class Api {
 		return fetch(`${this._address}/cards/likes/${id}`, {
 			method: like ? 'PUT' : 'DELETE',
 			headers: {
-				authorization: this._token,
+				//authorization: this._token,
 				'Content-Type': 'application/json'
-			}
+			},
+			credentials: 'include',
 		}).then(this._checkResponse)
 	}
 
@@ -91,21 +100,19 @@ class Api {
 		return fetch(`${this._address}/users/me/avatar`, {
 			method: 'PATCH',
 			headers: {
-				authorization: this._token,
+				//authorization: this._token,
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify({
 				avatar
-			})
+			}),
+			credentials: 'include',
 		})
 			.then(this._checkResponse)
 	}
 }
 
-const api = new Api({
-	address: 'https://mesto.nomoreparties.co/v1/cohort36',
-	token: 'bf2f8230-a13a-4d61-9144-22039310a203'
-});
+const api = new Api({ BASE_URL});
 
 export default api;
 
