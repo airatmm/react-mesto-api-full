@@ -32,12 +32,23 @@ export const authorize = (email, password) => {
         body: JSON.stringify({email, password}),
     })
         .then(checkResponse)
-        .then((data) => {
-            if (data.token) {
-                //localStorage.setItem('jwt', data.token);
-                return data;
-            }
-        })
+        // .then((data) => {
+        //     if (data.token) {
+        //         //localStorage.setItem('jwt', data.token);
+        //         return data;
+        //     }
+        // })
+};
+
+export const signout = () => {
+    return fetch(`${BASE_URL}/signout`, {
+        method: "GET",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        },
+        credentials: 'include',
+    }).then(checkResponse);
 };
 
 export const getContent = () => {

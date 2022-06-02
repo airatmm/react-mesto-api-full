@@ -15,7 +15,6 @@ import AddPlacePopup from './AddPlacePopup';
 import ConfirmDeletePopup from "./ConfirmDeletePopup";
 import ProtectedRoute from './ProtectedRoute';
 import * as auth from '../utils/auth';
-//import {getToken, removeToken, setToken} from "../utils/token.js";
 import HeaderInfoMobile from "./HeaderInfoMobile";
 import loader from '../images/loader.svg';
 import successAuth from '../images/success.svg';
@@ -149,7 +148,7 @@ const App = () => {
 // запусается после разметки и отрисовки
 // и перерендерится при логине (зависимость)
     useEffect(() => {
-        if (loggedIn) { // нужна ли проверка, нужно же загрузить один раз при рендере
+        //if (loggedIn) { // нужна ли проверка, нужно же загрузить один раз при рендере
             Promise.all([
                 api.getCards(),
                 api.getUserInfo()
@@ -159,23 +158,28 @@ const App = () => {
                     setCurrentUser(info);
                 })
                 .catch((err) => console.log(`Ошибка загрузки данных с сервера (cards или userInfo) ${err}`));
-        }
+       // }
     }, [loggedIn]);
 
+    // было /сохранение токена в localstorage/
+    // сейчас просто устанавливаем данные
+    const checkRes = (data) => {
+        if (data) {
+            //setToken(res.jwt);
+            setData({
+                email: data.email
+            });
+            // setLoggedIn(true);
+            // history.replace({pathname: "/"});
+        }
+    };
 
     useEffect(() => {
-        // получаем токен
-        // если токен хранящийся в localstorage соответствует токену пользователя логинимся сразу и пушим в "/"
-        // иначе на страницу логина + очищаем инпут эмайла
-        // const jwt = getToken();
-        // if (jwt) {
-            auth.getContent(/*jwt*/)
-                .then((res) => {
-                    if (res && res.data.email) {
+            auth.getContent()
+                .then((data) => {
+                    if (data && data.email) {
                         setLoggedIn(true);
-                        setData({
-                            email: res.data.email
-                        });
+                        checkRes(data);
                         history.push("/");
                     } else {
                         history.push("/sign-in")
@@ -188,23 +192,13 @@ const App = () => {
                         email: ""
                     });
                 });
-       // }
-    }, [loggedIn, history]); // зависмость от хистори и от залогинен ли пользователь
+         // }
+    }, [history]); // зависимость от хистори
 
 
-    // сохранение токена в localstorage
-    const checkRes = (res) => {
-        if (res.jwt) {
-            //setToken(res.jwt);
-            setData({
-                email: res.data.email
-            });
-            // setLoggedIn(true);
-            // history.replace({pathname: "/"});
-        }
-    };
 // выход
     const handleSignOut = () => {
+        auth.signout();
         setLoggedIn(false);
         setData({
             email: null
@@ -217,8 +211,8 @@ const App = () => {
     const handleLogin = (email, password) => {
         setIsLoading(true);
         auth.authorize(email, password)
-            .then((res) => {
-                checkRes(res)
+            .then((data) => {
+                checkRes(data)
                 setLoggedIn(true);
                 history.push('/');
             })
@@ -239,8 +233,8 @@ const App = () => {
     const handleRegister = (email, password) => {
         setIsLoading(true);
         auth.register(email, password)
-            .then((res) => {
-                checkRes(res)
+            .then((data) => {
+                checkRes(data)
                 setMessage({pathIcon: successAuth, text: 'Вы успешно зарегистрировались!'});
                 history.replace({pathname: '/sign-in'})
                 setInfoToolTip({

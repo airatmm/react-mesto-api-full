@@ -1,9 +1,8 @@
 import BASE_URL from './utils';
 
-
 class Api {
-	constructor({ BASE_URL }) {
-		this._address = BASE_URL;
+	constructor({ address }) {
+		this._address = address;
 		//this._token = token;
 	}
 // Проверяем на ошибки
@@ -19,12 +18,12 @@ class Api {
 		return fetch(`${this._address}/cards`, {
 			method: 'GET',
 			headers: {
+				Accept: "application/json",
 				//authorization: this._token,
 				'Content-Type': 'application/json'
 			},
 			credentials: 'include',
-		})
-			.then(this._checkResponse)
+		}).then(this._checkResponse)
 	}
 
 	// получение данных профиля с сервера
@@ -32,6 +31,7 @@ class Api {
 		return fetch(`${this._address}/users/me`, {
 			method: 'GET',
 			headers: {
+				Accept: "application/json",
 				//authorization: this._token,
 				'Content-Type': 'application/json'
 			},
@@ -44,6 +44,7 @@ class Api {
 		return fetch(`${this._address}/users/me`, {
 			method: 'PATCH',
 			headers: {
+				Accept: "application/json",
 				//authorization: this._token,
 				'Content-Type': 'application/json'
 			},
@@ -60,14 +61,16 @@ class Api {
 		return fetch(`${this._address}/cards`, {
 			method: 'POST',
 			headers: {
+				Accept: "application/json",
 				//authorization: this._token,
 				'Content-Type': 'application/json'
 			},
+			credentials: 'include',
 			body: JSON.stringify({
 				name,
 				link
 			}),
-			credentials: 'include',
+
 		}).then(this._checkResponse)
 	}
 
@@ -76,6 +79,7 @@ class Api {
 		return fetch(`${this._address}/cards/${id}`, {
 			method: 'DELETE',
 			headers: {
+				Accept: "application/json",
 				//authorization: this._token,
 				'Content-Type': 'application/json'
 			},
@@ -85,9 +89,10 @@ class Api {
 
 	// добавление лайка / удаление лайка
 	changeLikeCardStatus(id, like) {
-		return fetch(`${this._address}/cards/likes/${id}`, {
+		return fetch(`${this._address}/cards/${id}/likes`, {
 			method: like ? 'PUT' : 'DELETE',
 			headers: {
+				Accept: "application/json",
 				//authorization: this._token,
 				'Content-Type': 'application/json'
 			},
@@ -100,6 +105,7 @@ class Api {
 		return fetch(`${this._address}/users/me/avatar`, {
 			method: 'PATCH',
 			headers: {
+				Accept: "application/json",
 				//authorization: this._token,
 				'Content-Type': 'application/json'
 			},
@@ -107,12 +113,11 @@ class Api {
 				avatar
 			}),
 			credentials: 'include',
-		})
-			.then(this._checkResponse)
+		}).then(this._checkResponse)
 	}
 }
 
-const api = new Api({ BASE_URL});
+const api = new Api({ address: BASE_URL});
 
 export default api;
 
