@@ -21,8 +21,8 @@ const app = express();
 
 // Массив разрешенных кросс-доменных запросов
 const accessCors = [
-  // 'https://mesto-project-36.nomoredomains.xyz',
-  // 'http://mesto-project-36.nomoredomains.xyz',
+  'https://mesto-project-36.nomoredomains.xyz',
+  'http://mesto-project-36.nomoredomains.xyz',
   'http://localhost:3001',
 ];
 
