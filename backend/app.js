@@ -71,11 +71,12 @@ async function main() {
   // Так как используется хранение токена в cookies
   // добавляем роут signout, который очищает бы куки
   app.get('/signout', (req, res) => {
-    res.status(200).clearCookie('jwt', {
+    res.clearCookie('jwt', {
       httpOnly: true,
       sameSite: 'none',
       secure: true,
-    }).send({ message: 'Выход' });
+    });
+    res.status(200).send({ message: 'Выход' });
   });
 
   app.use(auth); // защищаем все роуты ниже, нет доступа неавторизованным пользователям
