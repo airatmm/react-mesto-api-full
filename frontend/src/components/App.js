@@ -148,7 +148,7 @@ const App = () => {
 // запусается после разметки и отрисовки
 // и перерендерится при логине (зависимость)
     useEffect(() => {
-        //if (loggedIn) { // нужна ли проверка, нужно же загрузить один раз при рендере
+        if (loggedIn) {
             Promise.all([
                 api.getCards(),
                 api.getUserInfo()
@@ -158,7 +158,7 @@ const App = () => {
                     setCurrentUser(info);
                 })
                 .catch((err) => console.log(`Ошибка загрузки данных с сервера (cards или userInfo) ${err}`));
-       // }
+       }
     }, [loggedIn]);
 
     // было /сохранение токена в localstorage/
@@ -175,6 +175,7 @@ const App = () => {
     };
 
     useEffect(() => {
+        if (loggedIn) {
             auth.getContent()
                 .then((data) => {
                     if (data && data.email) {
@@ -182,6 +183,7 @@ const App = () => {
                         checkRes(data);
                         history.push("/");
                     } else {
+                        setLoggedIn(false);
                         history.push("/sign-in")
                     }
                 })
@@ -192,7 +194,7 @@ const App = () => {
                         email: ""
                     });
                 });
-         // }
+           }
     }, [loggedIn, history]); // зависимость от хистори и loggedIn
 
 
