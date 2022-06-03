@@ -3,8 +3,8 @@ import BASE_URL from './utils';
 class Api {
 	constructor({ address }) {
 		this._address = address;
-		//this._token = token;
 	}
+
 // Проверяем на ошибки
 	_checkResponse(res) {
 		if (res.ok) {
@@ -19,7 +19,6 @@ class Api {
 			method: 'GET',
 			headers: {
 				Accept: "application/json",
-				//authorization: this._token,
 				'Content-Type': 'application/json'
 			},
 			credentials: 'include',
@@ -32,7 +31,6 @@ class Api {
 			method: 'GET',
 			headers: {
 				Accept: "application/json",
-				//authorization: this._token,
 				'Content-Type': 'application/json'
 			},
 			credentials: 'include',
@@ -45,7 +43,6 @@ class Api {
 			method: 'PATCH',
 			headers: {
 				Accept: "application/json",
-				//authorization: this._token,
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify({
@@ -62,7 +59,6 @@ class Api {
 			method: 'POST',
 			headers: {
 				Accept: "application/json",
-				//authorization: this._token,
 				'Content-Type': 'application/json'
 			},
 			credentials: 'include',
@@ -80,7 +76,6 @@ class Api {
 			method: 'DELETE',
 			headers: {
 				Accept: "application/json",
-				//authorization: this._token,
 				'Content-Type': 'application/json'
 			},
 			credentials: 'include',
@@ -93,7 +88,6 @@ class Api {
 			method: like ? 'PUT' : 'DELETE',
 			headers: {
 				Accept: "application/json",
-				//authorization: this._token,
 				'Content-Type': 'application/json'
 			},
 			credentials: 'include',
@@ -106,7 +100,6 @@ class Api {
 			method: 'PATCH',
 			headers: {
 				Accept: "application/json",
-				//authorization: this._token,
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify({

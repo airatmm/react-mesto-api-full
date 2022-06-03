@@ -180,11 +180,11 @@ const App = () => {
                 .then((data) => {
                     if (data && data.email) {
                         setLoggedIn(true);
-                        checkRes(data);
                         history.push("/");
+                        checkRes(data);
                     } else {
                         setLoggedIn(false);
-                        history.push("/sign-in")
+                        history.push("/sign-in");
                     }
                 })
                 .catch((err) => {
@@ -194,7 +194,7 @@ const App = () => {
                         email: ""
                     });
                 });
-           }
+        }
     }, [loggedIn, history]); // зависимость от хистори и loggedIn
 
 
@@ -308,7 +308,6 @@ const App = () => {
                     <Route>
                         {loggedIn ? <Redirect to="/"/> : <Redirect to="/sign-in"/>}
                     </Route>
-
                 </Switch>
                 <Footer/>
 
