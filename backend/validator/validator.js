@@ -1,12 +1,14 @@
 const { celebrate, Joi } = require('celebrate');
 
+const regLink = /(http|https):\/\/(www)?\.?([A-Za-z0-9.-]+)\.([A-z]{2,})((?:\/[+~%/.\w-_]*)?\??(?:[-=&;%@.\w_]*)#?(?:[\w]*))?/;
+
 // USERS
 // post /signup createUser
 const validateUser = celebrate({
   body: Joi.object().keys({
     name: Joi.string().min(2).max(30),
     about: Joi.string().min(2).max(30),
-    avatar: Joi.string().regex(/(http|https):\/\/(www)?\.?([A-Za-z0-9.-]+)\.([A-z]{2,})((?:\/[+~%/.\w-_]*)?\??(?:[-=&;%@.\w_]*)#?(?:[\w]*))?/),
+    avatar: Joi.string().regex(regLink),
     email: Joi.string().required().email(),
     password: Joi.string().required(),
   }),
@@ -31,7 +33,7 @@ const validateUserUpdate = celebrate({
 // path /users/me/avatar updateAvatar
 const validateAvatarUpdate = celebrate({
   body: Joi.object().keys({
-    avatar: Joi.string().regex(/(http|https):\/\/(www)?\.?([A-Za-z0-9.-]+)\.([A-z]{2,})((?:\/[+~%/.\w-_]*)?\??(?:[-=&;%@.\w_]*)#?(?:[\w]*))?/).required(),
+    avatar: Joi.string().regex(regLink).required(),
   }),
 });
 
@@ -46,7 +48,7 @@ const validateParamsUserById = celebrate({
 // post /cards createCards
 const validateCard = celebrate({
   body: Joi.object().keys({
-    link: Joi.string().regex(/(http|https):\/\/(www)?\.?([A-Za-z0-9.-]+)\.([A-z]{2,})((?:\/[+~%/.\w-_]*)?\??(?:[-=&;%@.\w_]*)#?(?:[\w]*))?/).required(),
+    link: Joi.string().regex(regLink).required(),
     name: Joi.string().required().min(2).max(30),
   }),
 });

@@ -82,15 +82,15 @@ async function main() {
   app.use('/', users);
   app.use('/', cards);
 
+  app.use(() => {
+    throw new NotFoundError('Ой! Такой страницы нет');
+  });
+
   // подключаем логгер ошибок
   // нужно подключить после обработчиков роутов и до обработчиков ошибок
   app.use(errorLogger);
 
   app.use(errors()); // обработчик ошибок celebrate
-
-  app.use(() => {
-    throw new NotFoundError('Ой! Такой страницы нет');
-  });
 
   app.use(handleError); // централизованная обработка ошибок
 

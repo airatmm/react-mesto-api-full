@@ -174,38 +174,39 @@ const App = () => {
         }
     };
 
-    useEffect(() => {
-        if (loggedIn) {
-            auth.getContent()
-                .then((data) => {
-                    if (data && data.email) {
-                        setLoggedIn(true);
-                        history.push("/");
-                        checkRes(data);
-                    } else {
-                        setLoggedIn(false);
-                        history.push("/sign-in");
-                    }
-                })
-                .catch((err) => {
-                    console.error(err);
+useEffect(() => {
+    if (loggedIn) {
+        auth.getContent()
+            .then((data) => {
+                if (data && data.email) {
+                    setLoggedIn(true);
+                    history.push("/");
+                    checkRes(data);
+                }
+                else {
                     setLoggedIn(false);
-                    setData({
-                        email: ""
-                    });
+                    history.push("/sign-in");
+                }
+            })
+            .catch((err) => {
+                console.error(err);
+                setLoggedIn(false);
+                setData({
+                    email: ""
                 });
-        }
-    }, [loggedIn, history]); // зависимость от хистори и loggedIn
+            });
+    }
+}, [loggedIn, history]); // зависимость от хистори и loggedIn
 
 
 // выход
-    const handleSignOut = () => {
-        auth.signout();
-        setLoggedIn(false);
-        setData({
-            email: null
-        });
-        //removeToken();
+const handleSignOut = () => {
+    auth.signout();
+    setLoggedIn(false);
+    setData({
+        email: null
+    });
+    //removeToken();
         history.push('/sign-in');
         setIsHeaderInfoOpened(false)
     }
